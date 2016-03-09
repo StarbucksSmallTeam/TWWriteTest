@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Bill {
@@ -23,15 +24,18 @@ public class Bill {
 	}
 
 	void printBill() {
+
+		DecimalFormat df = new DecimalFormat("#.00");
+
 		System.out.println("***<没钱赚商店>购物清单***");
 		for (int i = 0; i < billItem.size(); i++) {
 			BillItem item = billItem.get(i);
 			System.out.print("名称：" + item.buysItem.item.name + "，数量："
 					+ item.buysItem.count + item.buysItem.item.unit + "，单价："
-					+ item.buysItem.item.price + "(元)，小计：" + item.sumMoney
-					+ "(元)");
+					+ df.format(item.buysItem.item.price) + "(元)，小计："
+					+ df.format(item.sumMoney) + "(元)");
 			if (item.save > 0) {
-				System.out.print("，节省" + item.save + "(元)");
+				System.out.print("，节省" + df.format(item.save) + "(元)");
 			}
 			System.out.println();
 		}
@@ -49,8 +53,8 @@ public class Bill {
 			System.out.println("----------------------");
 		}
 
-		System.out.println("总计：" + totalMoney + "(元)");
-		System.out.println("节省：" + totalSave + "(元)");
+		System.out.println("总计：" + df.format(totalMoney) + "(元)");
+		System.out.println("节省：" + df.format(totalSave) + "(元)");
 		System.out.println("**********************");
 
 	}
